@@ -93,6 +93,7 @@ pytest_plugins = [
     "fixtures.categories",
     "fixtures.comments",
     "adapters.comment",
+    "test_content",
 ]
 
 
