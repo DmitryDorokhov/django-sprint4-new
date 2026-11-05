@@ -55,8 +55,6 @@ class PostModelAdapter(StudentModelAdapter):
 
     @property
     def displayed_field_name_or_value(self):
-        """Gets the field name (if `self` is class adapter) or its value
-        (if `self` is item adapter) that is displayed on a page"""
         if isclass(self._item_or_cls):
             return "title"
         else:

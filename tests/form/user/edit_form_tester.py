@@ -11,7 +11,6 @@ from form.base_form_tester import (
     FormTagMissingException,
     FormMethodException,
     TextareaMismatchException,
-    TextareaTagMissingException,
 )
 from form.base_form_tester import (
     SubmitTester,

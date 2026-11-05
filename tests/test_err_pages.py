@@ -56,9 +56,10 @@ def test_custom_err_handlers(client, user_client):
         except Exception as e:
             raise AssertionError(
                 'Убедитесь, что переменная TEMPLATES_DIR в настройках проекта '
-                'является строкой (str) или объектом, соответствующим path-like интерфейсу '
-                '(например, экземпляром pathlib.Path). '
-                f'При операции конкатенации settings.TEMPLATES_DIR / "pages", возникла ошибка: {e}'
+                'является строкой (str) или объектом, соответствующим '
+                'path-like интерфейсу '
+                f'(например, экземпляром pathlib.Path). '
+                f'При операции конкатенации возникла ошибка: {e}'
             )
         assert os.path.isfile(
             fpath.resolve()

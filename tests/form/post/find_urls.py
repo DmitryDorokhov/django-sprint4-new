@@ -16,13 +16,13 @@ def find_edit_and_delete_urls(
     urls_start_with: KeyVal,
 ) -> Tuple[KeyVal, KeyVal]:
     """Looks up two links in the post_page_response's content.
+
     The links must be found between the post's text and the first
     comment to the post.
     The one with the word `edit` in it is for editing the post,
     the other one, therefore, is for its deletion.
     !!! Make posts and comments have unique texts and titles.
     """
-
     post_page_content = post_page_response.content.decode("utf-8")
 
     links_not_found_err_msg = (

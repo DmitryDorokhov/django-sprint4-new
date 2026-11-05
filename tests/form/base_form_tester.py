@@ -100,8 +100,8 @@ class BaseFormTester(BaseTester):
         for f in forms:
             if (
                 ("logout" not in ((f.get("action") or "").lower()))
-                and ("выйти" not in f.get_text(" ",strip=True).lower())
-                ):
+                and ("выйти" not in f.get_text(" ", strip=True).lower())
+            ):
                 candidates.append(f)
 
         if not candidates:

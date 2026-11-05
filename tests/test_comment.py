@@ -21,7 +21,7 @@ from form.comment.create_form_tester import CreateCommentFormTester
 from form.comment.delete_tester import DeleteCommentTester
 from form.comment.edit_form_tester import EditCommentFormTester
 from form.comment.find_urls import find_edit_and_delete_urls
-from test_content import ProfilePostContentTester, profile_content_tester
+from test_content import ProfilePostContentTester
 from test_edit import _test_edit
 
 

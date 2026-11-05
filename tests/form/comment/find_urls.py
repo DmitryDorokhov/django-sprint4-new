@@ -16,14 +16,6 @@ def find_edit_and_delete_urls(
         urls_start_with: KeyVal,
         user_client: django.test.Client,
 ) -> Tuple[KeyVal, KeyVal]:
-    """Looks up two links in the post_page_response's content.
-    The links must be found between two adjacent comments to the post.
-    The link that leads to a page with a form in its template's context
-    is the one for editing the comment,
-    the other one, therefore, is for its deletion.
-    !!! Make sure each comment text in unique on the page.
-    """
-
     post_page_content = post_page_response.content.decode("utf-8")
     assert len(adapted_comments) >= 2
 

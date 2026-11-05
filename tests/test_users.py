@@ -77,13 +77,17 @@ def test_custom_err_handlers(client):
     }
     for template in auth_templates:
         try:
-            fpath: Path = Path(settings.TEMPLATES_DIR) / "registration" / template
+            fpath: Path = (
+                Path(settings.TEMPLATES_DIR) / "registration" / template
+            )
         except Exception as e:
             raise AssertionError(
                 'Убедитесь, что переменная TEMPLATES_DIR в настройках проекта '
-                'является строкой (str) или объектом, соответствующим path-like интерфейсу '
-                '(например, экземпляром pathlib.Path). '
-                f'При операции Path(settings.TEMPLATES_DIR) / "registration", возникла ошибка: {e}'
+                'является строкой (str) или объектом, соответствующим '
+                'path-like интерфейсу '
+                f'(например, экземпляром pathlib.Path). '
+                f'При операции Path(settings.TEMPLATES_DIR) / "registration" '
+                f'возникла ошибка: {e}'
             )
         frpath: Path = fpath.relative_to(settings.BASE_DIR)
         assert os.path.isfile(

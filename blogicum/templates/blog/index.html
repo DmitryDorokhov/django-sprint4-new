@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+  Лента записей
+{% endblock %}
+{% block content %}
+  <h1 class="mb-5">Лента записей</h1>
+  <div class="row">
+  {% for post in page_obj %}
+    {% if post.category %}
+      {% ifchanged %}
+        <div class="row mt-5" id="{{ post.category.slug }}">
+          <div class="col-12">
+            <h3>{{ post.category.title }}</h3>
+          </div>
+        </div>
+      {% endifchanged %}
+    {% endif %}
+    <article class="mb-5">  
+      {% include "includes/post_card.html" %}
+    </article>   
+  {% endfor %}
+  </div>
+  {% include "includes/paginator.html" %}
+{% endblock %}

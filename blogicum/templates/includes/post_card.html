@@ -1,0 +1,23 @@
+<div class="card" style="width: 40rem;">
+  {% if post.image %}
+    <div class="text-center">
+      <a href="{{ post.image.url }}" target="_blank">
+        <img src="{{ post.image.url }}" class="img-fluid rounded mt-3" alt="{{ post.title }}">
+      </a>
+    </div>
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">
+      <small>
+        {{ post.pub_date|date:"d E Y" }} | {% if post.location and post.location.is_published %}{{ post.location.name }}{% else %}Планета Земля{% endif %}<br>
+        От автора @{{ post.author.username }} в категории {% include "includes/category_link.html" %}
+      </small>
+    </h6>
+    <p class="card-text">{{ post.text|truncatewords:10|linebreaksbr }}</p>
+    <a href="{% url 'blog:post_detail' post.id %}" class="card-link">Читать полный текст</a>
+    <a href="{% url 'blog:post_detail' post.id %}" class="card-link">
+      ({{ post.comment_count|default:0 }})
+    </a>
+  </div>
+</div>

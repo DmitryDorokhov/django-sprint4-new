@@ -277,12 +277,12 @@ class CategoryPostContentTester(PostContentTester):
 
 @pytest.fixture
 def profile_content_tester(
-    user: Model,
-    mixer: Mixer,
-    PostModel: Type[Model],
-    user_client: Client,
-    another_user_client: Client,
-    unlogged_client: Client,
+        user: Model,
+        mixer: Mixer,
+        PostModel: Type[Model],
+        user_client: Client,
+        another_user_client: Client,
+        unlogged_client: Client,
 ) -> ProfilePostContentTester:
     url_repr = UrlRepr(f"/profile/{user.username}/", "/profile/<username>/")
     return ProfilePostContentTester(
@@ -401,7 +401,7 @@ class TestContent:
         else:
             context_posts = response.context.get(items_key)
             assert (
-                    len(context_posts) == 1
+                len(context_posts) == 1
             ), ("Убедитесь, что на странице пользователя "
                 "не отображаются публикации других авторов.")
 

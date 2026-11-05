@@ -28,7 +28,7 @@ from form.post.delete_tester import DeletePostTester
 from form.post.edit_form_tester import EditPostFormTester
 from form.post.find_urls import find_edit_and_delete_urls
 from form.post.form_tester import PostFormTester
-from test_content import MainPostContentTester, main_content_tester
+from test_content import MainPostContentTester
 from test_edit import _test_edit
 
 
@@ -40,10 +40,10 @@ from test_edit import _test_edit
         ("pub_date", DateTimeField, {
             'auto_now_add': False
         }, None, None, None, (
-                 "Проверьте, что в модели Post в атрибуте pub_date параметр "
-                 "`auto_now_add` не установлен или имеет значение `False`. "
-                 "В ином случае станет невозможно публиковать посты "
-                 "задним числом и отложенные посты.")),
+            "Проверьте, что в модели Post в атрибуте pub_date параметр "
+            "`auto_now_add` не установлен или имеет значение `False`. "
+            "В ином случае станет невозможно публиковать посты "
+            "задним числом и отложенные посты.")),
     ],
     ids=["`image` field", "`pub_date` field"]
 )
