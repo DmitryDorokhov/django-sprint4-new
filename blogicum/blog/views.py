@@ -88,11 +88,11 @@ def edit_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if post.author != request.user:
         return redirect('blog:post_detail', post_id)
-    form = PostCreateForm(request.POST, request.FILES, instance=post)
-    if not form.is_valid():
-        return render(request, 'blog/create.html', {'form': form})
-    form.save()
-    return redirect('blog:post_detail', post.id)
+    form = PostCreateForm(request.POST or None, request.FILES, instance=post)
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        return redirect('blog:post_detail', post.id)
+    return render(request, 'blog/create.html', {'form': form})
 
 
 @login_required
