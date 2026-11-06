@@ -98,7 +98,11 @@ def delete_post(request, post_id):
     if request.method == 'POST':
         post.delete()
         return redirect('blog:profile', request.user.username)
-    return render(request, 'blog/create.html', {'form': PostCreateForm(instance=post)})
+    return render(
+        request,
+        'blog/create.html', 
+        {'form': PostCreateForm(instance=post)}
+    )
 
 
 def profile(request, username):
