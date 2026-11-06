@@ -100,7 +100,7 @@ def delete_post(request, post_id):
         return redirect('blog:profile', request.user.username)
     return render(
         request,
-        'blog/create.html', 
+        'blog/create.html',
         {'form': PostCreateForm(instance=post)}
     )
 
