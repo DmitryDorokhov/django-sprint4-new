@@ -6,7 +6,6 @@ from typing import Tuple, Any, Type, List, Union
 
 import django.test.client
 import pytest
-import pytz
 from django.conf import settings
 from django.db.models import TextField, DateTimeField, ForeignKey, Model
 from django.forms import BaseForm
@@ -52,7 +51,7 @@ class TestCommentModelAttrs(_TestModelAttrs):
 @pytest.mark.django_db(transaction=True)
 def test_comment_created_at(comment, CommentModelAdapter):
     now = timezone.now()
-    now_utc = now.astimezone(pytz.UTC).replace(tzinfo=None)
+    now_utc = now.astimezone(datetime.timezone.utc).replace(tzinfo=None)
     assert abs(
         comment.created_at.replace(tzinfo=None) - now_utc
     ) < datetime.timedelta(seconds=1), (
