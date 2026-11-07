@@ -99,8 +99,8 @@ def test_custom_err_handlers(client):
 def test_profile(
         user, another_user, user_client, another_user_client, unlogged_client
 ):
-    user_url = f"/profile/{user.username}/"
-    printed_url = "/profile/<username>/"
+    user_url = f"/{user.username}/"
+    printed_url = "/<username>/"
 
     User = get_user_model()
     status_code_not_404_err_msg = (
@@ -108,7 +108,7 @@ def test_profile(
         "пользователя возвращается статус 404."
     )
     try:
-        response = user_client.get("/profile/this_is_unexisting_user_name/")
+        response = user_client.get("/this_is_unexisting_user_name/")
     except User.DoesNotExist:
         raise AssertionError(status_code_not_404_err_msg)
 

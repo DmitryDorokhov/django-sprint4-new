@@ -182,7 +182,7 @@ def test_comment(
     # check comment count on profile page
     comment_adapter = CommentModelAdapter(created_items[0])
     comment_post_adapter = PostModelAdapter(comment_adapter.post)
-    author_profile_url = f'/profile/{comment_post_adapter.author.username}/'
+    author_profile_url = f'/{comment_post_adapter.author.username}/'
     profile_content = (
         profile_content_tester.user_client_testget(
             url=author_profile_url).content.decode("utf-8"))
