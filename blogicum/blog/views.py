@@ -9,7 +9,8 @@ from blog.models import Post, Category, Comment, User
 from blog.paginator import get_page
 
 
-def get_posts(posts=Post.objects, published=True):
+def get_posts(posts=Post.objects, published=True, with_select_related=True,
+              with_annotation=True):
     """Фильтр по опубликованным."""
     if published:
         posts = posts.filter(
@@ -17,9 +18,11 @@ def get_posts(posts=Post.objects, published=True):
             category__is_published=True,
             pub_date__lte=timezone.now(),
         )
-    posts = posts.select_related('category', 'location', 'author')
-    posts = posts.annotate(comment_count=Count('comments'))
-    posts = posts.order_by(*posts.model._meta.ordering)
+    if with_select_related:
+        posts = posts.select_related('category', 'location', 'author')
+    if with_annotation:
+        posts = posts.annotate(comment_count=Count('comments'))
+        posts = posts.order_by(*posts.model._meta.ordering)
     return posts
 
 
@@ -39,7 +42,7 @@ def post_detail(request, post_id):
         })
 
     post = get_object_or_404(
-        get_posts(),
+        get_posts(with_select_related=False, with_annotation=False),
         pk=post_id,
     )
 
