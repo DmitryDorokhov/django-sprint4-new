@@ -284,7 +284,7 @@ def profile_content_tester(
         another_user_client: Client,
         unlogged_client: Client,
 ) -> ProfilePostContentTester:
-    url_repr = UrlRepr(f"/profile/{user.username}/", "/profile/<username>/")
+    url_repr = UrlRepr(f"/{user.username}/", "/<username>/")
     return ProfilePostContentTester(
         mixer,
         PostModel,

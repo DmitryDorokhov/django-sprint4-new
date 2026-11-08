@@ -7,7 +7,6 @@ from typing import Tuple, Type, List
 
 import django.test.client
 import pytest
-import pytz
 from django.db.models import Model, ImageField, DateTimeField
 from django.forms import BaseForm
 from django.http import HttpResponse
@@ -60,7 +59,7 @@ class TestPostModelAttrs(_TestModelAttrs):
 @pytest.mark.django_db(transaction=True)
 def test_post_created_at(post_with_published_location):
     now = timezone.now()
-    now_utc = now.astimezone(pytz.UTC).replace(tzinfo=None)
+    now_utc = now.astimezone(datetime.timezone.utc).replace(tzinfo=None)
     assert abs(
         post_with_published_location.created_at.replace(tzinfo=None) - now_utc
     ) < datetime.timedelta(seconds=1), (
@@ -310,12 +309,12 @@ def _test_create_items(
     )
     content = response_on_created.content.decode(encoding="utf8")
     redirected_to_profile = any(
-        [f'/profile/{PostAdapter(created_items[0]).author.username}' in x[0]
+        [f'/{PostAdapter(created_items[0]).author.username}/' in x[0]
          for x in response_on_created.redirect_chain])
     assert response_on_created.redirect_chain and redirected_to_profile, (
         'Убедитесь, что при создании поста '
         'пользователь перенаправляется на страницу своего профиля по '
-        'адресу `profile/<username>/`.'
+        'адресу `<username>/`.'
     )
     creation_tester.test_creation_response(content, created_items)
     return response_on_created, created_items

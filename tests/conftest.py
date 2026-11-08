@@ -97,6 +97,61 @@ pytest_plugins = [
 
 
 @pytest.fixture
+def profile_content_tester(
+        user: Model,
+        mixer,
+        PostModel: Type[Model],
+        user_client: Client,
+        another_user_client: Client,
+        unlogged_client: Client,
+):
+    from test_content import ProfilePostContentTester
+    from adapters.post import PostModelAdapter
+    url_repr = UrlRepr(f"/{user.username}/", "/<username>/")
+    return ProfilePostContentTester(
+        mixer,
+        PostModel,
+        PostModelAdapter,
+        user_client,
+        url_repr,
+        another_user_client,
+    )
+
+
+@pytest.fixture
+def main_content_tester(
+    user: Model,
+    mixer,
+    PostModel: Type[Model],
+    user_client: Client,
+    another_user_client: Client,
+    unlogged_client: Client,
+):
+    from test_content import MainPostContentTester
+    from adapters.post import PostModelAdapter
+    url_repr = UrlRepr("/", "/")
+    return MainPostContentTester(
+        mixer, PostModel, PostModelAdapter, user_client, url_repr
+    )
+
+
+@pytest.fixture
+def category_content_tester(
+    user: Model,
+    mixer,
+    PostModel: Type[Model],
+    user_client: Client,
+    another_user_client: Client,
+    unlogged_client: Client,
+):
+    from test_content import CategoryPostContentTester
+    from adapters.post import PostModelAdapter
+    return CategoryPostContentTester(
+        mixer, PostModel, PostModelAdapter, user_client
+    )
+
+
+@pytest.fixture
 def mixer():
     return _mixer
 

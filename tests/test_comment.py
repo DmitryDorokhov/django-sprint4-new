@@ -6,7 +6,6 @@ from typing import Tuple, Any, Type, List, Union
 
 import django.test.client
 import pytest
-import pytz
 from django.conf import settings
 from django.db.models import TextField, DateTimeField, ForeignKey, Model
 from django.forms import BaseForm
@@ -52,7 +51,7 @@ class TestCommentModelAttrs(_TestModelAttrs):
 @pytest.mark.django_db(transaction=True)
 def test_comment_created_at(comment, CommentModelAdapter):
     now = timezone.now()
-    now_utc = now.astimezone(pytz.UTC).replace(tzinfo=None)
+    now_utc = now.astimezone(datetime.timezone.utc).replace(tzinfo=None)
     assert abs(
         comment.created_at.replace(tzinfo=None) - now_utc
     ) < datetime.timedelta(seconds=1), (
@@ -182,7 +181,7 @@ def test_comment(
     # check comment count on profile page
     comment_adapter = CommentModelAdapter(created_items[0])
     comment_post_adapter = PostModelAdapter(comment_adapter.post)
-    author_profile_url = f'/profile/{comment_post_adapter.author.username}/'
+    author_profile_url = f'/{comment_post_adapter.author.username}/'
     profile_content = (
         profile_content_tester.user_client_testget(
             url=author_profile_url).content.decode("utf-8"))
