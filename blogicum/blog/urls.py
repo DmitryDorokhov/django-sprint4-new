@@ -13,7 +13,6 @@ urlpatterns = [
         name='category_posts',
     ),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
-    path('<str:username>/', views.profile, name='profile'),
     path('posts/create/', views.create_post, name='create_post'),
     path('posts/<int:post_id>/edit/', views.edit_post, name='edit_post'),
     path(
@@ -36,4 +35,5 @@ urlpatterns = [
         views.delete_comment,
         name='delete_comment',
     ),
+    path('<str:username>/', views.profile, name='profile'),
 ]
